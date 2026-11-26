@@ -1,75 +1,38 @@
 # Library App
 
-## Description
+The Library App is a .NET console application for managing library patrons and book loans. Its code is divided into application-core, infrastructure, and console projects, with unit tests for the core services.
 
-Library App is a modular application designed to manage library operations such as book loans, patron management, and inventory tracking. It is built using .NET and follows a clean architecture approach to ensure scalability and maintainability.
+## Project structure
 
-## Project Structure
+```text
+AccelerateDevGHCopilot/
+├── src/
+│   ├── Library.ApplicationCore/   # Domain entities, interfaces, enums, and services
+│   ├── Library.Console/           # Console UI, startup, configuration, and JSON data
+│   │   └── Json/                  # Authors, books, book items, loans, and patrons
+│   └── Library.Infrastructure/    # JSON data loading and repository implementations
+└── tests/
+    └── UnitTests/                 # xUnit tests for application-core services
+```
 
-- `AccelerateDevGHCopilot.sln` - Solution file for the project.
-- `src/`
-  - `Library.ApplicationCore/`
-    - `Entities/` - Contains core domain entities.
-    - `Enums/` - Defines enumerations used across the application.
-    - `Interfaces/` - Declares interfaces for core abstractions.
-    - `Services/` - Implements business logic and domain services.
-    - `Library.ApplicationCore.csproj` - Project file for the Application Core.
-  - `Library.Console/`
-    - `appSettings.json` - Configuration file for the console application.
-    - `CommonActions.cs` - Contains reusable actions for the console app.
-    - `ConsoleApp.cs` - Main application logic for the console interface.
-    - `ConsoleState.cs` - Manages the state of the console application.
-    - `Program.cs` - Entry point for the console application.
-    - `Json/` - Contains JSON-related utilities or data.
-    - `Library.Console.csproj` - Project file for the Console application.
-  - `Library.Infrastructure/`
-    - `Data/` - Contains data access implementations.
-    - `Library.Infrastructure.csproj` - Project file for the Infrastructure layer.
-- `tests/`
-  - `UnitTests/`
-    - `LoanFactory.cs` - Factory for creating test data related to loans.
-    - `PatronFactory.cs` - Factory for creating test data related to patrons.
-    - `ApplicationCore/` - Contains unit tests for the Application Core.
-    - `UnitTests.csproj` - Project file for unit tests.
+`Library.Console/appSettings.json` configures the paths to the JSON data files. The console project loads the data and uses the repositories and application services to handle library operations.
 
-## Key Classes and Interfaces
+## Requirements
 
-- **Entities**
-  - `Book` - Represents a book in the library.
-  - `Patron` - Represents a library patron.
-  - `Loan` - Represents a loan transaction.
-- **Interfaces**
-  - `IBookRepository` - Interface for book-related data operations.
-  - `IPatronRepository` - Interface for patron-related data operations.
-  - `ILoanService` - Interface for managing loan operations.
-- **Services**
-  - `LoanService` - Implements loan-related business logic.
-  - `NotificationService` - Handles notifications for overdue loans.
+- .NET 9 SDK
 
 ## Usage
 
-1. Clone the repository:
+Run these commands from the `AccelerateDevGHCopilot` directory:
 
-   ```bash
-   git clone <repository-url>
-   ```
+```sh
+dotnet build src/Library.Console/Library.Console.csproj
+dotnet run --project src/Library.Console/Library.Console.csproj
+dotnet test tests/UnitTests/UnitTests.csproj
+```
 
-2. Open the solution file `AccelerateDevGHCopilot.sln` in Visual Studio.
-
-3. Build the solution to restore dependencies and compile the code.
-
-4. Run the console application:
-
-   ```bash
-   dotnet run --project src/Library.Console/Library.Console.csproj
-   ```
-
-5. Execute unit tests:
-
-   ```bash
-   dotnet test tests/UnitTests/UnitTests.csproj
-   ```
+The console app is interactive. Follow its prompts to search for patrons, view loans, and perform available loan actions.
 
 ## License
 
-This project is licensed under the MIT License. See the `LICENSE` file for details.
+This project is distributed under the MIT License. See the repository's [LICENSE](../../../LICENSE) file for the license text.
